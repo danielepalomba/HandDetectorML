@@ -5,7 +5,7 @@ def add_column_result(input_file, output_file):
     df = pd.read_csv(input_file)
 
     '''
-    df['result'] = 1 Scissor
+    df['result'] = 1 Scissors
     df['result'] = 2 Paper
     df['result'] = 3 Rock
     df['result'] = 4 ErrorHandling
@@ -17,6 +17,6 @@ def add_column_result(input_file, output_file):
 
 # Example
 input_file = 'input.csv'
-output_file = 'output-labeled.csv'
+output_file = 'output.csv'
 
 add_column_result(input_file, output_file)

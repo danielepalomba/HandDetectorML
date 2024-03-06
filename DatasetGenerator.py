@@ -11,6 +11,9 @@ mpdrawing = mp.solutions.drawing_utils
 # video capture
 vidcap = cv2.VideoCapture(0)
 
+cv2.namedWindow('Hand Tracking', cv2.WINDOW_NORMAL)
+cv2.resizeWindow('Hand Tracking', 1000, 1000)
+
 # hand tracking
 with mphands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.5) as hands:
     # add columns name to CSV file

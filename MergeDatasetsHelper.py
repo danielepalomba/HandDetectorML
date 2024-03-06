@@ -23,11 +23,11 @@ def unify_csv(file1, file2, file3, file4, file5, output_file):
 
 
 if __name__ == "__main__":
-    file1 = "paper-labeled.csv"
-    file2 = "wrong-labeled.csv"
-    file3 = "exit-labeled.csv"
-    file4 = "scissor-labeled.csv"
-    file5 = "rock-labeled.csv"
-    output_file = "merged-dataset.csv"
+    file1 = "paper.csv"
+    file2 = "wrong.csv"
+    file3 = "exit.csv"
+    file4 = "scissors.csv"
+    file5 = "rock.csv"
+    output_file = "merged-dataset2d.csv"
 
     unify_csv(file1, file2, file3, file4, file5, output_file)
