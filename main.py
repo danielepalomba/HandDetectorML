@@ -6,7 +6,7 @@ import mediapipe as mp
 class MyModel:
 
     def __init__(self):
-        # Carica il modello addestrato e lo scaler
+        # load model & scaler
         self.model = joblib.load('model.joblib')
         self.scaler = joblib.load('scaler.joblib')
 
@@ -47,24 +47,25 @@ if __name__ == "__main__":
                         landmarks.extend([point.x, point.y, point.z])
 
                     if prev_landmarks is not None:
-                        # Calcola la differenza tra le coordinate della mano in due frame consecutivi
+                        # calculate the difference between the hand coordinates in two consecutive frames
                         diff = sum(abs(a - b) for a, b in zip(prev_landmarks, landmarks))
 
-                        # Soglia per determinare se la mano è ferma
-                        threshold = 10.0
-
+                        # threshold for determining whether the hand is still
+                        threshold = 0.09
+                        #  If the hand is still, you get the prediction
                         if diff < threshold:
                             result = my_model.predict(landmarks)
-                            if result in [1, 2, 3]:
-                                if(result == 1):
-                                    print("FORBICE")
-                                if(result == 2):
-                                    print("CARTA")
-                                if(result == 3):
-                                    print("SASSO")
+                            if result in [1, 2, 3, 4]:
+                                if result == 1:
+                                    print("SCISSOR")
+                                if result == 2:
+                                    print("PAPER")
+                                if result == 3:
+                                    print("ROCK")
+                                if result == 4:
+                                    print("Bad Hand Position!")
                             break
 
-                    # Aggiorna le coordinate precedenti
                     prev_landmarks = landmarks
 
             cv2.imshow('Hand Tracking', frame)
