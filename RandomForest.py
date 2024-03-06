@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 import joblib
 
-dt = pd.read_csv('dataset.csv')
+dt = pd.read_csv('merged-dataset.csv')
 
 X = dt.drop(['result'], axis = 1)
 y = dt['result']

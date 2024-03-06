@@ -26,13 +26,18 @@ if __name__ == "__main__":
 
     vidcap = cv2.VideoCapture(0)
 
+    cv2.namedWindow('Hand Tracking', cv2.WINDOW_NORMAL)
+    cv2.resizeWindow('Hand Tracking', 1000, 1000)
+
     with mphands.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.5) as hands:
         prev_landmarks = None
 
-        while True:
+        exit_program = False
+
+        while not exit_program:
             ret, frame = vidcap.read()
             if not ret:
-                print("Errore nella lettura del frame")
+                print("Error in frame")
                 break
 
             rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -55,7 +60,7 @@ if __name__ == "__main__":
                         #  If the hand is still, you get the prediction
                         if diff < threshold:
                             result = my_model.predict(landmarks)
-                            if result in [1, 2, 3, 4]:
+                            if result in [1, 2, 3, 4, 5]:
                                 if result == 1:
                                     print("SCISSOR")
                                 if result == 2:
@@ -64,13 +69,15 @@ if __name__ == "__main__":
                                     print("ROCK")
                                 if result == 4:
                                     print("Bad Hand Position!")
-                            break
+                                if result == 5:
+                                    print("Exit OK!")
+                                    exit_program = True
 
                     prev_landmarks = landmarks
 
             cv2.imshow('Hand Tracking', frame)
             if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
+                exit_program = True
 
     vidcap.release()
     cv2.destroyAllWindows()

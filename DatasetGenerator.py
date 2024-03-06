@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import csv
 
-my_file = 'your-file.csv'
+my_file = 'wrong.csv'
 
 # mediapipe hands module
 mphands = mp.solutions.hands
